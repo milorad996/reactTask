@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import React, { useState } from 'react';
 import './App.css';
+import { type } from '@testing-library/user-event/dist/type';
 
 function App() {
 
@@ -15,37 +16,40 @@ function App() {
     { type: 'Konj', name: 'Poni', dateOfBirth: new Date() },
   ];
 
-  const removeProduct = (index) => {
-    setProductsArray([
-      ...products.slice(0, index),
-      ...products.slice(index + 1, products.length)
-    ]);
-  }
+  const [items, setItems] = useState(animals);
+
+  const deleteItem = (index) =>
+    setItems((items) => items.filter((_, i) => i !== index));
+
+
 
 
   return (
     <div>
       <h1>Zivotinje</h1>
       <table>
-
-        {animals.map((animal, index) => (
-
-
-          <tr key={index}>
-            <td>{animal.type}</td>
-            <td>{animal.name}</td>
-            {animal.dateOfBirth !== null ?
-              <td>{animal.dateOfBirth.toDateString()}</td> :
-              <p>Nepoznato</p>
-            }
-            <td>
-              <button onClick={deleteItem(index)}>Remove</button>
-            </td>
-          </tr>
+        <tbody>
+          {items.map((animal, index) => (
 
 
+            <tr key={index}>
+              <td>{animal.type} </td>
+              <td>{animal.name}</td>
+              {animal.dateOfBirth !== null ?
+                <td>{animal.dateOfBirth.toDateString()}</td> :
+                <p>Nepoznato</p>
+              }
 
-        ))}
+              <td>
+                <button onClick={() => deleteItem(index)}>delete</button>
+
+              </td>
+            </tr>
+
+
+
+          ))}
+        </tbody>
       </table>
 
     </div>
