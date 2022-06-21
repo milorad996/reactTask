@@ -24,7 +24,10 @@ function App() {
           <tr key={index}>
             <td>{animal.vrsta}</td>
             <td>{animal.name}</td>
-            <td>{animal.datumRodjenja.toDateString()}</td>
+            {animal.datumRodjenja !== '' ?
+              <td>{animal.datumRodjenja.toDateString()}</td> :
+              <p>Nepoznato</p>
+            }
           </tr>
 
         </table>
