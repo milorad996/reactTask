@@ -8,16 +8,19 @@ function App() {
 
 
   const animals = [
-    { vrsta: 'Pas', name: 'Boni', datumRodjenja: new Date() },
-    { vrsta: 'Majmun', name: 'Moni', datumRodjenja: new Date() },
-    { vrsta: 'Pingvin', name: 'Riki', datumRodjenja: new Date() },
-    { vrsta: 'Zirafa', name: 'Spongi', datumRodjenja: new Date() },
-    { vrsta: 'Konj', name: 'Poni', datumRodjenja: new Date() },
+    { type: 'Pas', name: 'Boni', dateOfBirth: new Date() },
+    { type: 'Majmun', name: 'Moni', dateOfBirth: new Date() },
+    { type: 'Pingvin', name: 'Riki', dateOfBirth: new Date() },
+    { type: 'Zirafa', name: 'Spongi', dateOfBirth: new Date() },
+    { type: 'Konj', name: 'Poni', dateOfBirth: new Date() },
   ];
 
-  const [items, setItems] = useState(animals);
-  const deleteItem = (index) => () =>
-    setItems((items) => items.filter((_, i) => i !== index));
+  const removeProduct = (index) => {
+    setProductsArray([
+      ...products.slice(0, index),
+      ...products.slice(index + 1, products.length)
+    ]);
+  }
 
 
   return (
@@ -29,10 +32,10 @@ function App() {
 
 
           <tr key={index}>
-            <td>{animal.vrsta}</td>
+            <td>{animal.type}</td>
             <td>{animal.name}</td>
-            {animal.datumRodjenja !== null ?
-              <td>{animal.datumRodjenja.toDateString()}</td> :
+            {animal.dateOfBirth !== null ?
+              <td>{animal.dateOfBirth.toDateString()}</td> :
               <p>Nepoznato</p>
             }
             <td>
