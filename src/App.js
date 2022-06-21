@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -14,25 +15,35 @@ function App() {
     { vrsta: 'Konj', name: 'Poni', datumRodjenja: new Date() },
   ];
 
+  const [items, setItems] = useState(animals);
+  const deleteItem = (index) => () =>
+    setItems((items) => items.filter((_, i) => i !== index));
+
+
   return (
     <div>
       <h1>Zivotinje</h1>
+      <table>
 
-      {animals.map((animal, index) => (
-        <table>
+        {animals.map((animal, index) => (
+
 
           <tr key={index}>
             <td>{animal.vrsta}</td>
             <td>{animal.name}</td>
-            {animal.datumRodjenja !== '' ?
+            {animal.datumRodjenja !== null ?
               <td>{animal.datumRodjenja.toDateString()}</td> :
               <p>Nepoznato</p>
             }
+            <td>
+              <button onClick={deleteItem(index)}>Remove</button>
+            </td>
           </tr>
 
-        </table>
 
-      ))}
+
+        ))}
+      </table>
 
     </div>
   );
